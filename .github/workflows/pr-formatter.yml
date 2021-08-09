@@ -38,6 +38,8 @@ jobs:
         run: |-
           (git diff --exit-code --color && git diff --cached --exit-code --color) || { 
             set +x 
+            git config --global user.email "debasish.ghosh@lightbend.com"
+            git config --global user.name "Debasish Ghosh"
             git commit --author="Akka Jenkins Autoformatter <johannes.rudolph@gmail.com>" -a -m "Autoformatted code" 
             git remote remove pr-origin || true # don't care if it was there or not 
             git remote add pr-origin https://github.com/${{github.repository}}.git  
