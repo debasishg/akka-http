@@ -26,7 +26,6 @@ jobs:
       - name: Format
         run: |-
           sbt -jvm-opts .jvmopts-ci \
-            -Dakka.http.mima.exclusion-template-prefix=pr-${ghprbPullId}-auto-generated \
             -Dakka.genjavadoc.enabled=true \
             -Dakka.test.timefactor=2 \
             -Dakka.cluster.assert=on \
@@ -40,8 +39,7 @@ jobs:
             set +x 
             git config --global user.email "debasish.ghosh@lightbend.com"
             git config --global user.name "Debasish Ghosh"
-            git commit --author="Akka Jenkins Autoformatter <johannes.rudolph@gmail.com>" -a -m "Autoformatted code" 
-            git remote remove pr-origin || true # don't care if it was there or not 
+            git remote remove pr-origin || true 
             git remote add pr-origin https://github.com/${{github.repository}}.git  
             git push pr-origin HEAD:${{github.ref}} 
           }
